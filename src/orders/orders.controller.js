@@ -123,23 +123,20 @@ function create(req, res) {
  
 //GET /orders/:orderId
 function read(req, res) {
-    const { orderId } = req.params;
-    const foundOrder = orders.find((order) => order.id === orderId);
-    res.status(200).json({ data: foundOrder });
+    res.status(200).json({ data: res.locals.order });
 }
  
 //PUT /orders/:orderId
 function update(req, res) {
-    const { orderId } = req.params;
-    const foundOrder = orders.find((order) => order.id === orderId);
+   const order = res.locals.order;
     const { data: { deliverTo, mobileNumber, status, dishes } = {} } = req.body;
  
-    foundOrder.deliverTo = deliverTo;
-    foundOrder.mobileNumber = mobileNumber;
-    foundOrder.status = status;
-    foundOrder.dishes = dishes;
+    order.deliverTo = deliverTo;
+    order.mobileNumber = mobileNumber;
+    order.status = status;
+    order.dishes = dishes;
  
-    res.json({data: foundOrder })
+    res.json({data: order })
 }
  
  
